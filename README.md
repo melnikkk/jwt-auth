@@ -2,6 +2,8 @@
 
 ### **Stack:**
 
-* TypeScript
 * Express
-* CORS are using to enable cross origin request.
+* CORS (using to enable cross origin request)
+* bcrypt.js
+* JSONWebToken
+* Dotenv
