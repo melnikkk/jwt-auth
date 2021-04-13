@@ -13,14 +13,14 @@ exports.createRefreshToken = (userID) => (
 );
 
 exports.sendRefreshToken = (res, token) => {
-	res.cookie('refreshToken', token, {
+	res.cookie('refreshtoken', token, {
 		httpOnly: true,
 		path: '/refresh_token'
 	});
 };
 
 exports.sendAccessToken = (res, req, token) => {
-	res.send('refreshToken', {
+	res.send({
 		accessToken: token,
 		email: req.body.email,
 	});
