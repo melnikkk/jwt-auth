@@ -8,8 +8,9 @@ const {
 	createAccessToken,
 	createRefreshToken,
 	sendAccessToken,
-	sendRefreshToken
-} = require('./token');
+	sendRefreshToken,
+	isAuth,
+} = require('./utils');
 const { fakeDB } = require('../db');
 
 const server = express();
@@ -89,7 +90,7 @@ server.post('/login', async (req, res) => {
 	} catch (error) {
 		res.send({
 			message: `${error.message}`
-		})
+		});
 	}
 });
 
@@ -101,4 +102,24 @@ server.post('/logout', async (req, res) => {
 	return res.send({
 		message: 'Logged out :(',
 	});
-})
+});
+
+server.post('/protected', async (req, res) => {
+	try {
+		const userID = isAuth(req);
+
+		if (userID !== null) {
+			res.send({
+				data: 'No access :|'
+			})
+		}
+
+		res.send({
+			data: 'Got access :)'
+		})
+	} catch (error) {
+		res.send({
+			error: `${error.message}`,
+		})
+	}
+});
