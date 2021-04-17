@@ -4,6 +4,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { hash, compare } = require('bcryptjs');
+const { verify } = require('jsonwebtoken');
 const {
 	createAccessToken,
 	createRefreshToken,
@@ -122,4 +123,49 @@ server.post('/protected', async (req, res) => {
 			error: `${error.message}`,
 		})
 	}
+});
+
+server.post('/refreshtoken', (req, res) => {
+	const cookiesRefreshToken = req.cookies.refreshtoken;
+
+	if (!cookiesRefreshToken) {
+		res.send({
+			accesstoken: '',
+		})
+	}
+
+	let payload;
+
+	try {
+		payload = verify(cookiesRefreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+	} catch (error) {
+		return res.send({
+			accesstoken: '',
+		});
+	}
+
+	const user = fakeDB((user) => user.id === payload.userID);
+
+	if (!user) {
+		return res.send({
+			accesstoken: '',
+		});
+	}
+
+	if (user.refreshtoken !== cookiesRefreshToken) {
+		return res.send({
+			accesstoken: '',
+		});
+	}
+
+	const accesstoken = createAccessToken(user.id);
+	const refreshtoken = createRefreshToken(user.id);
+
+	// DB user update logic here
+	user.refreshtoken = refreshtoken;
+
+	sendRefreshToken(res, refreshtoken);
+
+	return res.send({ accesstoken });
 });
