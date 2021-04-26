@@ -1,5 +1,5 @@
 (function () {
-	let html = `
+	const html = `
         <form id="register">
           <h1 class="title">Register</h1>
           <div class="input-block">
@@ -50,4 +50,4 @@
 		const form = document.getElementById('register');
 		form.addEventListener('submit', register);
 	};
-}())
+}());
