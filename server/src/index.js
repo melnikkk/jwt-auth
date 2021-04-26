@@ -96,7 +96,7 @@ server.post('/login', async (req, res) => {
 });
 
 server.post('/logout', async (req, res) => {
-	res.clearCookie('refreshtoken', { path: '/refresh_token'});
+	res.clearCookie('refresh_token', { path: '/refresh_token'});
 
 	//Code here to remove refresh token from the db
 
