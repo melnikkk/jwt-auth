@@ -2,14 +2,13 @@ const links = document.querySelectorAll('.nav-item');
 const content = document.querySelector('#content');
 
 const navigate = (link) => {
-	debugger
 	window[link](content);
 }
 
 links.forEach((link) => {
 	link.addEventListener('click', (e) => {
 		const navLink = e.target.dataset.navlink;
-		debugger
+
 		navigate(navLink);
 	})
 });
