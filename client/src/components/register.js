@@ -23,8 +23,9 @@
 
 	const register = async (e) => {
 		e.preventDefault();
-		let email = document.querySelector("#email").value;
-		let password = document.querySelector("#password").value;
+
+		const email = document.querySelector("#email").value;
+		const password = document.querySelector("#password").value;
 
 
 		const result = await (await fetch(`http://localhost:4000/register`, {
@@ -33,8 +34,8 @@
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				email: email,
-				password: password,
+				email,
+				password,
 			}),
 		})).json();
 		if (!result.error) {
