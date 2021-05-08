@@ -21,7 +21,7 @@
 		</form>
 	`;
 	const logoutItem = `
-  	<span id='logout' class="nav-item" data-navlink="logout">Logout</span>
+  	<button id='logout' class="button" data-navlink="logout">Logout</button>
 	`
 	const login = async (e) => {
 		e.preventDefault()

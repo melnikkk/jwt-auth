@@ -43,11 +43,13 @@ body, h1, input {
 }
 
 .button {
+  max-width: 300px;
   min-width: 70px;
   height: 30px;
   border-radius: 5px;
   border: 1px solid #000;
   cursor: pointer;
+  align-self: center;
 }
 
 .content-block {
