@@ -109,7 +109,7 @@ server.post('/protected', async (req, res) => {
 	try {
 		const userID = isAuth(req);
 
-		if (userID !== null) {
+		if (userID === null) {
 			res.send({
 				data: 'No access :|'
 			})
